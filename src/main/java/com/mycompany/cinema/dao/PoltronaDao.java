@@ -70,12 +70,12 @@ public class PoltronaDao extends AbstractDao<Poltrona>{
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Long id) {
         return false;
     }
 
     @Override
-    public Poltrona findById(int id) {
+    public Poltrona findById(Long id) {
         return null;
     }
 

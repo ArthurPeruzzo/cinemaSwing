@@ -20,7 +20,8 @@ public  class Util {
                 (jInternalFrame.getDesktopPane().getSize().height - jInternalFrame.getSize().height) / 2);
     }
 
-    public static boolean nuloOuVazio(Collection<?> collection){
+    public static boolean listNuloOuVazio(Collection<?> collection){
            return collection == null || collection.isEmpty();
     }
+
 }

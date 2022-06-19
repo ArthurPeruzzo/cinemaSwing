@@ -14,15 +14,15 @@ import java.util.List;
  */
 public abstract class AbstractDao<T> {
     
-        protected Connection connection;
+    protected Connection connection;
 
     public abstract T insert(T object);
 
     public abstract List<T> findAll();
 
-    public abstract boolean delete(int id);
+    public abstract boolean delete(Long id);
 
-    public abstract T findById(int id);
+    public abstract T findById(Long id);
 
     public abstract boolean update(T object);
 

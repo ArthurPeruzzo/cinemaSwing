@@ -2,21 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.cinema;
+package com.mycompany.cinema.view;
 
 import com.mycompany.cinema.conexao.Conexao;
 import com.mycompany.cinema.dao.PedidoDao;
 import com.mycompany.cinema.dao.PoltronaDao;
 import com.mycompany.cinema.entidade.Poltrona;
-import com.mycompany.cinema.processo.Teste;
 import com.mycompany.cinema.util.Util;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -49,6 +46,13 @@ public class JFrame extends javax.swing.JFrame {
         A2 = new javax.swing.JRadioButton();
         A3 = new javax.swing.JRadioButton();
         comprar = new javax.swing.JButton();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,10 +79,46 @@ public class JFrame extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 241, Short.MAX_VALUE)
+        );
+
+        jMenu1.setText("Cadastro");
+
+        jMenuItem1.setText("Filmes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+        jMenu1.add(jSeparator1);
+
+        jMenuItem2.setText("Sair");
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(427, Short.MAX_VALUE)
+                .addComponent(comprar)
+                .addGap(106, 106, 106))
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(A1)
@@ -86,21 +126,23 @@ public class JFrame extends javax.swing.JFrame {
                 .addComponent(A2)
                 .addGap(18, 18, 18)
                 .addComponent(A3)
-                .addContainerGap(427, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(comprar)
-                .addGap(106, 106, 106))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jDesktopPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(A1)
                     .addComponent(A2)
                     .addComponent(A3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jDesktopPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(comprar)
                 .addContainerGap())
         );
@@ -118,22 +160,29 @@ public class JFrame extends javax.swing.JFrame {
 
     private void comprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprarActionPerformed
         List<JRadioButton> radionButtons = getRadionButtons();
-        if(!Util.nuloOuVazio(radionButtons)) {
+        if(!Util.listNuloOuVazio(radionButtons)) {
 
             List<JRadioButton> radiosButtonsSeleconados = radionButtons.stream().filter(radionButton -> radionButton.isSelected() && radionButton.isEnabled()).toList();
             List<Poltrona> poltronas = poltronaDao.findAll();
             List<Poltrona> poltronasSelecionadas = null;
-            if(!Util.nuloOuVazio(radiosButtonsSeleconados) && !Util.nuloOuVazio(poltronas)) {
+            if(!Util.listNuloOuVazio(radiosButtonsSeleconados) && !Util.listNuloOuVazio(poltronas)) {
                 poltronasSelecionadas = poltronas.stream().filter(poltrona ->
                         radiosButtonsSeleconados.stream().anyMatch(radionButton -> radionButton.getText().equals(poltrona.getCodigo()))).toList();
 
             }
-            if(!Util.nuloOuVazio(poltronasSelecionadas)){
+            if(!Util.listNuloOuVazio(poltronasSelecionadas)){
                 System.out.println("cria pedido...");
             }
         }
 
     }//GEN-LAST:event_comprarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        IfrFilmes ifrFilmes = new IfrFilmes();
+        jDesktopPane1.add(ifrFilmes);
+        Util.centralizarFrame(ifrFilmes);
+        ifrFilmes.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,7 +223,7 @@ public class JFrame extends javax.swing.JFrame {
     private void verificaPoltronasCompradas() {
         List<Poltrona> poltronas = poltronaDao.buscaPoltronasIndisponiveis();
         List<JRadioButton> radionButtons = getRadionButtons();
-        if(!Util.nuloOuVazio(poltronas) && !Util.nuloOuVazio(radionButtons)){
+        if(!Util.listNuloOuVazio(poltronas) && !Util.listNuloOuVazio(radionButtons)){
             poltronas.forEach(poltrona -> {
                 radionButtons.forEach(jRadioButton -> {
                     if(poltrona.getCodigo().equals(jRadioButton.getText())){
@@ -195,5 +244,12 @@ public class JFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton A2;
     private javax.swing.JRadioButton A3;
     private javax.swing.JButton comprar;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

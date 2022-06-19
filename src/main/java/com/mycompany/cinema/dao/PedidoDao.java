@@ -60,12 +60,12 @@ public class PedidoDao extends AbstractDao<Pedido>{
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Long id) {
         return false;
     }
 
     @Override
-    public Pedido findById(int id) {
+    public Pedido findById(Long id) {
         return null;
     }
 
