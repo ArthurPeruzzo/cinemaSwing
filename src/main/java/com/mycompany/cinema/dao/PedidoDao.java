@@ -6,6 +6,7 @@ package com.mycompany.cinema.dao;
 
 import com.mycompany.cinema.entidade.*;
 
+import javax.swing.*;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -29,23 +30,19 @@ public class PedidoDao extends AbstractDao<Pedido>{
         Pedido pedidoSalvo = new Pedido();
         try {
             if (pedido != null) {
-                preparedStatement = super.connection.prepareStatement("insert into pedido (salaid, filmeid, pessoaid, datahora, status, poltronaid) values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                preparedStatement = super.connection.prepareStatement("insert into pedido (salaid, filmeid, datahora, status) values (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setLong(1, pedido.getSala().getId());
                 preparedStatement.setLong(2, pedido.getFilme().getId());
-                preparedStatement.setLong(3, pedido.getPessoa().getId());
-                preparedStatement.setTimestamp(4, Timestamp.valueOf(dateTimeFormatter.format(pedido.getDataHora())));
-                preparedStatement.setString(5, String.valueOf(pedido.getStatus()));
-                preparedStatement.setLong(6, pedido.getPoltrona().getId());
+                preparedStatement.setTimestamp(3, Timestamp.valueOf(dateTimeFormatter.format(pedido.getDataHora())));
+                preparedStatement.setString(4, String.valueOf(pedido.getStatus()));
                 preparedStatement.executeUpdate();
                 resultSet = preparedStatement.getGeneratedKeys();
                 while (resultSet.next()) {
                     pedidoSalvo.setId(resultSet.getLong("id"));
                     pedidoSalvo.setSala(new Sala(resultSet.getLong("salaid")));
                     pedidoSalvo.setFilme(new Filme(resultSet.getLong("filmeid")));
-                    pedidoSalvo.setPessoa(new Pessoa(resultSet.getLong("pessoaid")));
                     pedidoSalvo.setDataHora(resultSet.getTimestamp("datahora").toLocalDateTime());
                     pedidoSalvo.setStatus(StatusPedido.valueOf(resultSet.getString("status")));
-                    pedidoSalvo.setPoltrona(new Poltrona(resultSet.getLong("poltronaid")));
                 }
             }
         } catch (SQLException e) {
@@ -61,7 +58,15 @@ public class PedidoDao extends AbstractDao<Pedido>{
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        try {
+            preparedStatement = connection.prepareStatement("DELETE FROM pedido WHERE id = ?");
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir.");
+            return false;
+        }
     }
 
     @Override

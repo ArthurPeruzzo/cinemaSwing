@@ -22,21 +22,15 @@ public class Pedido {
 
     private StatusPedido status;
 
-    private Pessoa pessoa;
-    
-    private Poltrona poltrona;
-
     public Pedido() {
     }
 
-    public Pedido(Long id, Sala sala, Filme filme, LocalDateTime dataHora, StatusPedido status, Pessoa pessoa, Poltrona poltrona) {
+    public Pedido(Long id, Sala sala, Filme filme, LocalDateTime dataHora, StatusPedido status) {
         this.id = id;
         this.sala = sala;
         this.filme = filme;
         this.dataHora = dataHora;
         this.status = status;
-        this.pessoa = pessoa;
-        this.poltrona = poltrona;
     }
 
     public Long getId() {
@@ -77,22 +71,6 @@ public class Pedido {
 
     public void setStatus(StatusPedido status) {
         this.status = status;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
-    public Poltrona getPoltrona() {
-        return poltrona;
-    }
-
-    public void setPoltrona(Poltrona poltrona) {
-        this.poltrona = poltrona;
     }
     
 }

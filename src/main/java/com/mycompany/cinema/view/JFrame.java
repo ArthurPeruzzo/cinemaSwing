@@ -29,6 +29,7 @@ public class JFrame extends javax.swing.JFrame {
      */
     public JFrame() {
         initComponents();
+        super.setExtendedState(MAXIMIZED_BOTH);
         verificaPoltronasCompradas();
         
     }
@@ -49,8 +50,14 @@ public class JFrame extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuFilme = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuSala = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jHorariosMenu = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jPoltronaMenu = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
@@ -92,16 +99,48 @@ public class JFrame extends javax.swing.JFrame {
 
         jMenu1.setText("Cadastro");
 
-        jMenuItem1.setText("Filmes");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuFilme.setText("Filmes");
+        jMenuFilme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuFilmeActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(jMenuFilme);
         jMenu1.add(jSeparator1);
 
+        jMenuSala.setText("Salas");
+        jMenuSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSalaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuSala);
+        jMenu1.add(jSeparator3);
+
+        jHorariosMenu.setText("Horários");
+        jHorariosMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jHorariosMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jHorariosMenu);
+        jMenu1.add(jSeparator4);
+
+        jPoltronaMenu.setText("Poltronas");
+        jPoltronaMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPoltronaMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jPoltronaMenu);
+        jMenu1.add(jSeparator2);
+
         jMenuItem2.setText("Sair");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
@@ -158,7 +197,25 @@ public class JFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_A3ActionPerformed
 
-    private void comprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprarActionPerformed
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jHorariosMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHorariosMenuActionPerformed
+        IfrHorarioSessao irfHorarioSessao = new IfrHorarioSessao();
+        jDesktopPane1.add(irfHorarioSessao);
+        Util.centralizarFrame(irfHorarioSessao);
+        irfHorarioSessao.setVisible(true);
+    }//GEN-LAST:event_jHorariosMenuActionPerformed
+
+    private void jPoltronaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPoltronaMenuActionPerformed
+        IfrPoltronas ifrPoltronas = new IfrPoltronas();
+        jDesktopPane1.add(ifrPoltronas);
+        Util.centralizarFrame(ifrPoltronas);
+        ifrPoltronas.setVisible(true);
+    }//GEN-LAST:event_jPoltronaMenuActionPerformed
+
+    private void comprarActionPerformed(java.awt.event.ActionEvent evt) {                                        
         List<JRadioButton> radionButtons = getRadionButtons();
         if(!Util.listNuloOuVazio(radionButtons)) {
 
@@ -175,14 +232,21 @@ public class JFrame extends javax.swing.JFrame {
             }
         }
 
-    }//GEN-LAST:event_comprarActionPerformed
+    }
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuFilmeActionPerformed(java.awt.event.ActionEvent evt) {                                           
         IfrFilmes ifrFilmes = new IfrFilmes();
         jDesktopPane1.add(ifrFilmes);
         Util.centralizarFrame(ifrFilmes);
         ifrFilmes.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }
+
+    private void jMenuSalaActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        IfrSalas ifrSalas = new IfrSalas();
+        jDesktopPane1.add(ifrSalas);
+        Util.centralizarFrame(ifrSalas);
+        ifrSalas.setVisible(true);
+    }
 
     /**
      * @param args the command line arguments
@@ -245,11 +309,17 @@ public class JFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton A3;
     private javax.swing.JButton comprar;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenuItem jHorariosMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuFilme;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuSala;
+    private javax.swing.JMenuItem jPoltronaMenu;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     // End of variables declaration//GEN-END:variables
 }

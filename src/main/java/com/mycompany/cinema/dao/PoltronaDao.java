@@ -6,6 +6,7 @@ package com.mycompany.cinema.dao;
 
 import com.mycompany.cinema.entidade.*;
 
+import javax.swing.*;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,36 +20,29 @@ public class PoltronaDao extends AbstractDao<Poltrona>{
 
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
 
     public PoltronaDao() {
         super.getConexao();
     }
 
     @Override
-    public Poltrona insert(Poltrona pedido) {
-        Poltrona pedidoSalvo = new Poltrona();
-        if (pedido != null) {
-//                preparedStatement = super.connection.prepareStatement("insert into pedido (salaid, filmeid, pessoaid, datahora, status, poltronaid) values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-//                preparedStatement.setLong(1, pedido.getSala().getId());
-//                preparedStatement.setLong(2, pedido.getFilme().getId());
-//                preparedStatement.setLong(3, pedido.getPessoa().getId());
-//                preparedStatement.setTimestamp(4, Timestamp.valueOf(dateTimeFormatter.format(pedido.getDataHora())));
-//                preparedStatement.setString(5, String.valueOf(pedido.getStatus()));
-//                preparedStatement.setLong(6, pedido.getPoltrona().getId());
-//                preparedStatement.executeUpdate();
-//                resultSet = preparedStatement.getGeneratedKeys();
-//                while (resultSet.next()) {
-//                    pedidoSalvo.setId(resultSet.getLong("id"));
-//                    pedidoSalvo.setSala(new Sala(resultSet.getLong("salaid")));
-//                    pedidoSalvo.setFilme(new Filme(resultSet.getLong("filmeid")));
-//                    pedidoSalvo.setPessoa(new Pessoa(resultSet.getLong("pessoaid")));
-//                    pedidoSalvo.setDataHora(resultSet.getTimestamp("datahora").toLocalDateTime());
-//                    pedidoSalvo.setStatus(StatusPoltrona.valueOf(resultSet.getString("status")));
-//                    pedidoSalvo.setPoltrona(new Poltrona(resultSet.getLong("poltronaid")));
-//                }
+    public Poltrona insert(Poltrona poltrona) {
+        Poltrona poltronaSalva = new Poltrona();
+        try {
+            if (poltrona != null) {
+                preparedStatement = super.connection.prepareStatement("INSERT INTO poltrona (codigo) values (?)", Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setString(1, poltrona.getCodigo());
+                preparedStatement.executeUpdate();
+                resultSet = preparedStatement.getGeneratedKeys();
+                while (resultSet.next()) {
+                    poltronaSalva.setId(resultSet.getLong("id"));
+                    poltronaSalva.setCodigo(resultSet.getString("codigo"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return pedidoSalvo;
+        return poltronaSalva;
     }
 
     @Override
@@ -71,16 +65,48 @@ public class PoltronaDao extends AbstractDao<Poltrona>{
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        try {
+            preparedStatement = connection.prepareStatement("DELETE FROM poltrona WHERE id = ?");
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir.");
+            return false;
+        }
     }
 
     @Override
     public Poltrona findById(Long id) {
-        return null;
+        Poltrona poltrona = new Poltrona();
+        try {
+            preparedStatement = connection.prepareStatement("SELECT * FROM poltrona WHERE id = ?");
+            preparedStatement.setLong(1, id);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                poltrona.setId(resultSet.getLong("id"));
+                poltrona.setCodigo(resultSet.getString("codigo"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return poltrona;
     }
 
     @Override
-    public boolean update(Poltrona object) {
+    public boolean update(Poltrona poltrona) {
+        try {
+            if (poltrona != null) {
+                preparedStatement = super.connection.prepareStatement("update poltrona set codigo = ? where id = ?;", Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setString(1, poltrona.getCodigo());
+                preparedStatement.setLong(2, poltrona.getId());
+                preparedStatement.executeUpdate();
+                resultSet = preparedStatement.getGeneratedKeys();
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

@@ -16,10 +16,6 @@ public class Sala {
 
     private String codigo;
 
-    private Cidade cidade;
-
-    private BigDecimal capacidade;
-
     public Sala() {
     }
 
@@ -27,11 +23,9 @@ public class Sala {
         this.id = id;
     }
 
-    public Sala(Long id, String codigo, Cidade cidade, BigDecimal capacidade) {
+    public Sala(Long id, String codigo) {
         this.id = id;
         this.codigo = codigo;
-        this.cidade = cidade;
-        this.capacidade = capacidade;
     }
 
     public Long getId() {
@@ -50,19 +44,4 @@ public class Sala {
         this.codigo = codigo;
     }
 
-    public Cidade getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
-    }
-
-    public BigDecimal getCapacidade() {
-        return capacidade;
-    }
-
-    public void setCapacidade(BigDecimal capacidade) {
-        this.capacidade = capacidade;
-    }
 }

@@ -51,20 +51,4 @@ public class FilmeListModel extends AbstractTableModel {
         return colunas[column];
     }
 
-    public void insertModel(Filme filme) {
-        filmes.add(filme);
-        int ultimoIndice = getRowCount() - 1;
-        fireTableRowsInserted(ultimoIndice, ultimoIndice);
-    }
-
-    public void removeModel(int indexRow) {
-        filmes.remove(indexRow);
-        fireTableRowsDeleted(indexRow, indexRow);
-    }
-
-    public void atualizarModel(int indiceLinha, Filme filme) {
-        filmes.set(indiceLinha, filme);
-        fireTableRowsUpdated(indiceLinha, indiceLinha);
-    }
-
 }

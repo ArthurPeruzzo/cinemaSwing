@@ -8,10 +8,6 @@ package com.mycompany.cinema.util;
 import javax.swing.*;
 import java.util.Collection;
 
-/**
- *
- * @author Andreia
- */
 public  class Util {
     
        public static void centralizarFrame(JInternalFrame jInternalFrame) {
