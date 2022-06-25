@@ -350,7 +350,7 @@ public class IfrFilmes extends javax.swing.JInternalFrame {
                 filme.setId(Long.valueOf(filmeId.getText()));
             }
             filme.setNome(nomeFilmeText.getText());
-            filme.setDataHoraEstreia(LocalDateTime.parse(dataPreEstreia.getText(), dateTimeFormatter));
+            filme.setDataHoraEstreia(LocalDateTime.parse(dataEstreia.getText(), dateTimeFormatter));
             filme.setDataHoraPreEstreia(LocalDateTime.parse(dataPreEstreia.getText(), dateTimeFormatter));
         }
         return filme;
