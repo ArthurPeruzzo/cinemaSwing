@@ -12,7 +12,7 @@ public class FilmeListModel extends AbstractTableModel {
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-    private final String[] colunas = new String[]{"Código", "Nome", "Data da estreia", "Data da pré-estreia" };
+    private final String[] colunas = new String[]{"Código", "Nome", "Data da estreia"};
 
     public FilmeListModel(List<Filme> filmes) {
         this.filmes = filmes;
@@ -38,8 +38,6 @@ public class FilmeListModel extends AbstractTableModel {
                 return filme.getNome();
             case 2:
                 return dateTimeFormatter.format(filme.getDataHoraEstreia());
-            case 3:
-                return dateTimeFormatter.format(filme.getDataHoraPreEstreia());
             default:
                 break;
         }

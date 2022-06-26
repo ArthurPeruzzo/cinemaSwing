@@ -18,22 +18,31 @@ public class Filme {
 
     private LocalDateTime dataHoraEstreia;
 
-    private LocalDateTime dataHoraPreEstreia;
-
     public Filme() {
     }
 
-    public Filme(String nome, LocalDateTime dataHoraEstreia, LocalDateTime dataHoraPreEstreia) {
-        this.nome = nome;
-        this.dataHoraEstreia = dataHoraEstreia;
-        this.dataHoraPreEstreia = dataHoraPreEstreia;
+    public Filme(Long id) {
+        this.id = id;
     }
 
-    public Filme(Long id, String nome, LocalDateTime dataHoraEstreia, LocalDateTime dataHoraPreEstreia) {
+    public Filme(Object filme) {
+        if (filme != null) {
+            Filme filmeObject = (Filme) filme;
+            this.id = filmeObject.getId();
+            this.nome = filmeObject.getNome();
+            this.dataHoraEstreia = filmeObject.getDataHoraEstreia();
+        }
+    }
+
+    public Filme(String nome, LocalDateTime dataHoraEstreia) {
+        this.nome = nome;
+        this.dataHoraEstreia = dataHoraEstreia;
+    }
+
+    public Filme(Long id, String nome, LocalDateTime dataHoraEstreia) {
         this.id = id;
         this.nome = nome;
         this.dataHoraEstreia = dataHoraEstreia;
-        this.dataHoraPreEstreia = dataHoraPreEstreia;
     }
 
     public Filme(long id) {
@@ -64,11 +73,8 @@ public class Filme {
         this.dataHoraEstreia = dataHoraEstreia;
     }
 
-    public LocalDateTime getDataHoraPreEstreia() {
-        return dataHoraPreEstreia;
-    }
-
-    public void setDataHoraPreEstreia(LocalDateTime dataHoraPreEstreia) {
-        this.dataHoraPreEstreia = dataHoraPreEstreia;
+    @Override
+    public String toString() {
+        return id + " - " + nome;
     }
 }

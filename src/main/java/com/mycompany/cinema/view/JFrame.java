@@ -7,10 +7,14 @@ package com.mycompany.cinema.view;
 import com.mycompany.cinema.conexao.Conexao;
 import com.mycompany.cinema.dao.PedidoDao;
 import com.mycompany.cinema.dao.PoltronaDao;
+import com.mycompany.cinema.entidade.HorarioSessao;
 import com.mycompany.cinema.entidade.Poltrona;
 import com.mycompany.cinema.util.Util;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,18 +24,12 @@ import java.util.List;
  * @author Arthur
  */
 public class JFrame extends javax.swing.JFrame {
-    private final PoltronaDao poltronaDao = new PoltronaDao();
-    private final PedidoDao pedidoDao = new PedidoDao();
-
-
     /**
      * Creates new form JFrame
      */
     public JFrame() {
         initComponents();
         super.setExtendedState(MAXIMIZED_BOTH);
-        verificaPoltronasCompradas();
-        
     }
 
     /**
@@ -43,10 +41,6 @@ public class JFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        A1 = new javax.swing.JRadioButton();
-        A2 = new javax.swing.JRadioButton();
-        A3 = new javax.swing.JRadioButton();
-        comprar = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -60,37 +54,15 @@ public class JFrame extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jHorario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        A1.setText("A-1");
-        A1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                A1ActionPerformed(evt);
-            }
-        });
-
-        A2.setText("A-2");
-
-        A3.setText("A-3");
-        A3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                A3ActionPerformed(evt);
-            }
-        });
-
-        comprar.setText("COMPRAR");
-        comprar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comprarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 598, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +117,16 @@ public class JFrame extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Sessões");
+
+        jHorario.setText("Horários");
+        jHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jHorarioActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jHorario);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -154,18 +135,6 @@ public class JFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(427, Short.MAX_VALUE)
-                .addComponent(comprar)
-                .addGap(106, 106, 106))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(A1)
-                .addGap(18, 18, 18)
-                .addComponent(A2)
-                .addGap(18, 18, 18)
-                .addComponent(A3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jDesktopPane1)
@@ -174,28 +143,13 @@ public class JFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(A1)
-                    .addComponent(A2)
-                    .addComponent(A3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(30, 30, 30)
                 .addComponent(jDesktopPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comprar)
-                .addContainerGap())
+                .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void A1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_A1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_A1ActionPerformed
-
-    private void A3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_A3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_A3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
@@ -215,24 +169,12 @@ public class JFrame extends javax.swing.JFrame {
         ifrPoltronas.setVisible(true);
     }//GEN-LAST:event_jPoltronaMenuActionPerformed
 
-    private void comprarActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        List<JRadioButton> radionButtons = getRadionButtons();
-        if(!Util.listNuloOuVazio(radionButtons)) {
-
-            List<JRadioButton> radiosButtonsSeleconados = radionButtons.stream().filter(radionButton -> radionButton.isSelected() && radionButton.isEnabled()).toList();
-            List<Poltrona> poltronas = poltronaDao.findAll();
-            List<Poltrona> poltronasSelecionadas = null;
-            if(!Util.listNuloOuVazio(radiosButtonsSeleconados) && !Util.listNuloOuVazio(poltronas)) {
-                poltronasSelecionadas = poltronas.stream().filter(poltrona ->
-                        radiosButtonsSeleconados.stream().anyMatch(radionButton -> radionButton.getText().equals(poltrona.getCodigo()))).toList();
-
-            }
-            if(!Util.listNuloOuVazio(poltronasSelecionadas)){
-                System.out.println("cria pedido...");
-            }
-        }
-
-    }
+    private void jHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHorarioActionPerformed
+        IfrHorarioSessaoListagem irfHorarioSessaoListagem = new IfrHorarioSessaoListagem();
+        jDesktopPane1.add(irfHorarioSessaoListagem);
+        Util.centralizarFrame(irfHorarioSessaoListagem);
+        irfHorarioSessaoListagem.setVisible(true);
+    }//GEN-LAST:event_jHorarioActionPerformed
 
     private void jMenuFilmeActionPerformed(java.awt.event.ActionEvent evt) {                                           
         IfrFilmes ifrFilmes = new IfrFilmes();
@@ -246,6 +188,13 @@ public class JFrame extends javax.swing.JFrame {
         jDesktopPane1.add(ifrSalas);
         Util.centralizarFrame(ifrSalas);
         ifrSalas.setVisible(true);
+    }
+
+    public static void horarioSessaoListagem(HorarioSessao horarioSessao){
+        IfrPoltronasListagem ifrPoltronasListagem = new IfrPoltronasListagem(horarioSessao);
+        jDesktopPane1.add(ifrPoltronasListagem);
+        Util.centralizarFrame(ifrPoltronasListagem);
+        ifrPoltronasListagem.setVisible(true);
     }
 
     /**
@@ -278,37 +227,33 @@ public class JFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrame().setVisible(true);
+                JFrame jFrame = new JFrame();
+                jFrame.setVisible(true);
+                windowsListener(jFrame);
                 Conexao.getConexao();
             };
         });
     }
 
-    private void verificaPoltronasCompradas() {
-        List<Poltrona> poltronas = poltronaDao.buscaPoltronasIndisponiveis();
-        List<JRadioButton> radionButtons = getRadionButtons();
-        if(!Util.listNuloOuVazio(poltronas) && !Util.listNuloOuVazio(radionButtons)){
-            poltronas.forEach(poltrona -> {
-                radionButtons.forEach(jRadioButton -> {
-                    if(poltrona.getCodigo().equals(jRadioButton.getText())){
-                        jRadioButton.setEnabled(false);
-                        jRadioButton.setSelected(true);
-                    }
-                });
-            });
-        }
-    }
-
-    private List<JRadioButton> getRadionButtons() {
-        return new ArrayList<>(Arrays.asList(A1, A2, A3));
+    public static void windowsListener(JFrame jFrame){
+        jFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int opcao = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?",
+                        "Sair",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (opcao == JOptionPane.YES_OPTION) {
+                    jFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                }else{
+                    jFrame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                }
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton A1;
-    private javax.swing.JRadioButton A2;
-    private javax.swing.JRadioButton A3;
-    private javax.swing.JButton comprar;
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private static javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenuItem jHorario;
     private javax.swing.JMenuItem jHorariosMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -321,5 +266,6 @@ public class JFrame extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
+
     // End of variables declaration//GEN-END:variables
 }

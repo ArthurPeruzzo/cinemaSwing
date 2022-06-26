@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,6 +24,7 @@ public class IfrHorarioSessao extends JInternalFrame {
     private final FilmeDao filmeDao = new FilmeDao();
     private final DateTimeFormatter dateTimeFormatterData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private final DateTimeFormatter dateTimeFormatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private HorarioSessaoListModel horarioSessaoListModel = null;
 
 
     public IfrHorarioSessao() {
@@ -37,20 +39,20 @@ public class IfrHorarioSessao extends JInternalFrame {
     private void buscaSalas() {
         List<Sala> salas = salaDao.findAll();
         if(!Util.listNuloOuVazio(salas)){
-            salas.forEach(s -> sala.addItem(s.getId().toString()));
+            salas.forEach(s -> sala.addItem(s));
         }
     }
 
     private void buscaFilmes() {
         List<Filme> filmes = filmeDao.findAll();
         if(!Util.listNuloOuVazio(filmes)){
-            filmes.forEach(f -> filme.addItem(f.getId().toString()));
+            filmes.forEach(f -> filme.addItem(f));
         }
     }
 
     public void atualizaListaDeHorarioSessaos(){
         List<HorarioSessao> horariosSessao = horarioDao.findAll();
-        HorarioSessaoListModel horarioSessaoListModel = new HorarioSessaoListModel(horariosSessao);
+        horarioSessaoListModel = new HorarioSessaoListModel(horariosSessao);
         limpaForm();
         jTable1.setModel(horarioSessaoListModel);
     }
@@ -58,6 +60,8 @@ public class IfrHorarioSessao extends JInternalFrame {
     private void limpaForm() {
         data.setText(null);
         hora.setText(null);
+        filme.setSelectedIndex(-1);
+        sala.setSelectedIndex(-1);
     }
 
     @SuppressWarnings("unchecked")
@@ -168,7 +172,7 @@ public class IfrHorarioSessao extends JInternalFrame {
             }
         });
 
-        jButton5.setText("Atualizar");
+        jButton5.setText("Editar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -237,7 +241,7 @@ public class IfrHorarioSessao extends JInternalFrame {
 
         data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
-        hora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance())));
+        hora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("HH:mm:ss"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -297,7 +301,13 @@ public class IfrHorarioSessao extends JInternalFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         int linhaSelecionada = jTable1.getSelectedRow();
         if (linhaSelecionada >= 0) {
-            Long idHorarioSessao = (Long) jTable1.getValueAt(linhaSelecionada, 0);
+            HorarioSessao horarioSessaoPorLinha = horarioSessaoListModel.getHorarioSessaoPorLinha(linhaSelecionada);
+//            filme.setSelectedIndex(-1);
+//            filme.setSelectedItem(horarioSessaoPorLinha.getFilme());
+//            sala.setSelectedIndex(-1);
+//            sala.setSelectedItem(horarioSessaoPorLinha.getSala());
+//            data.setText(dateTimeFormatterData.format(horarioSessaoPorLinha.getData()));
+//            hora.setText(dateTimeFormatterHora.format(horarioSessaoPorLinha.getHora()));
         }
     }
 
@@ -327,7 +337,7 @@ public class IfrHorarioSessao extends JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField data;
     private javax.swing.JButton fechar;
-    private javax.swing.JComboBox<String> filme;
+    private javax.swing.JComboBox<Filme> filme;
     private javax.swing.JFormattedTextField hora;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
@@ -343,7 +353,7 @@ public class IfrHorarioSessao extends JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton limparForm;
-    private javax.swing.JComboBox<String> sala;
+    private javax.swing.JComboBox<Sala> sala;
     // End of variables declaration//GEN-END:variables
 
     private HorarioSessao getHorarioSessao() {
@@ -351,8 +361,8 @@ public class IfrHorarioSessao extends JInternalFrame {
         if(!Objects.isNull(sala.getSelectedItem()) && !Objects.isNull(filme.getSelectedItem()) &&
             !data.getText().equals("") && !hora.getText().equals("")){
             horarioSessao = new HorarioSessao();
-                horarioSessao.setSala(new Sala(Long.parseLong(String.valueOf(sala.getSelectedItem().toString()))));
-                horarioSessao.setFilme(new Filme(Long.parseLong(String.valueOf(filme.getSelectedItem().toString()))));
+                horarioSessao.setSala(new Sala(sala.getSelectedItem()));
+                horarioSessao.setFilme(new Filme(filme.getSelectedItem()));
                 horarioSessao.setHora(LocalTime.parse(hora.getText(), dateTimeFormatterHora));
                 horarioSessao.setData(LocalDate.parse(data.getText(), dateTimeFormatterData));
         }
@@ -362,7 +372,7 @@ public class IfrHorarioSessao extends JInternalFrame {
     private void save() {
         HorarioSessao horarioSessao = getHorarioSessao();
         if (horarioSessao != null) {
-                horarioDao.insert(horarioSessao);
+            horarioDao.insert(horarioSessao);
         }
         atualizaListaDeHorarioSessaos();
     }

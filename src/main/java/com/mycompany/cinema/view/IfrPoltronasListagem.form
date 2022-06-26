@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <Properties>
+    <Property name="closable" type="boolean" value="true"/>
+    <Property name="iconifiable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel1" max="32767" attributes="0"/>
+          <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+              <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Selecione as poltronas que deseja"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel3">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="A1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="B1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="C1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="D1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="B2" min="-2" max="-2" attributes="0"/>
+                      <Component id="A2" min="-2" max="-2" attributes="0"/>
+                      <Component id="C2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="D2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="A3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="B3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="C3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="D3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="A4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="B4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="C4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="D4" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="A5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="B5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="C5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="D5" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="D6" min="-2" max="-2" attributes="0"/>
+                      <Component id="C6" min="-2" max="-2" attributes="0"/>
+                      <Component id="A6" min="-2" max="-2" attributes="0"/>
+                      <Component id="B6" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="9" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="A1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="A2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="A3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="A4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="A5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="A6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="B1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="B2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="B3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="B4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="B5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="B6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="C1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="C2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="C3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="C4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="C5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="C6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="D1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="D2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="D3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="D4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="D5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="D6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JRadioButton" name="A1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="A-1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="A2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="A-2"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="A3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="A-3"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="A4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="A-4"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="A5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="A-5"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="A6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="A-6"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="B1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="B-1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="B2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="B-2"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="B3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="B-3"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="B4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="B-4"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="B5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="B-5"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="B6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="B-6"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="C1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C-1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="C2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C-2"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="C3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C-3"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="C4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C-4"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="C5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C-5"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="C6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C-6"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="D1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="D-1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="D2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="D-2"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="D3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="D-3"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="D4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="D-4"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="D4ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="D5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="D-5"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="D6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="D-6"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel4">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="jCompra">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Comprar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCompraActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jFechar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fechar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFecharActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

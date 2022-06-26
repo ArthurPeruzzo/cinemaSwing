@@ -30,11 +30,10 @@ public class PedidoDao extends AbstractDao<Pedido>{
         Pedido pedidoSalvo = new Pedido();
         try {
             if (pedido != null) {
-                preparedStatement = super.connection.prepareStatement("insert into pedido (salaid, filmeid, datahora, status) values (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                preparedStatement = super.connection.prepareStatement("insert into pedido (salaid, filmeid, datahora) values (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setLong(1, pedido.getSala().getId());
                 preparedStatement.setLong(2, pedido.getFilme().getId());
                 preparedStatement.setTimestamp(3, Timestamp.valueOf(dateTimeFormatter.format(pedido.getDataHora())));
-                preparedStatement.setString(4, String.valueOf(pedido.getStatus()));
                 preparedStatement.executeUpdate();
                 resultSet = preparedStatement.getGeneratedKeys();
                 while (resultSet.next()) {
@@ -42,7 +41,6 @@ public class PedidoDao extends AbstractDao<Pedido>{
                     pedidoSalvo.setSala(new Sala(resultSet.getLong("salaid")));
                     pedidoSalvo.setFilme(new Filme(resultSet.getLong("filmeid")));
                     pedidoSalvo.setDataHora(resultSet.getTimestamp("datahora").toLocalDateTime());
-                    pedidoSalvo.setStatus(StatusPedido.valueOf(resultSet.getString("status")));
                 }
             }
         } catch (SQLException e) {

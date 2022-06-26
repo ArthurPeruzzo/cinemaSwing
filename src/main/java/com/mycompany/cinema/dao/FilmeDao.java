@@ -1,6 +1,7 @@
 package com.mycompany.cinema.dao;
 
 import com.mycompany.cinema.entidade.Filme;
+import com.mycompany.cinema.util.Util;
 
 import javax.swing.*;
 import java.sql.*;
@@ -23,10 +24,9 @@ public class FilmeDao extends AbstractDao<Filme> {
         Filme filmeSalvo = new Filme();
         try {
             if (filme != null) {
-                preparedStatement = super.connection.prepareStatement("INSERT INTO filme (nome, estreia, preestreia) values (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                preparedStatement = super.connection.prepareStatement("INSERT INTO filme (nome, estreia) values (?, ?)", Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setString(1, filme.getNome());
                 preparedStatement.setTimestamp(2, Timestamp.valueOf(dateTimeFormatter.format(filme.getDataHoraEstreia())));
-                preparedStatement.setTimestamp(3, Timestamp.valueOf(dateTimeFormatter.format(filme.getDataHoraPreEstreia())));
                 preparedStatement.executeUpdate();
                 resultSet = preparedStatement.getGeneratedKeys();
 
@@ -34,11 +34,10 @@ public class FilmeDao extends AbstractDao<Filme> {
                     filmeSalvo.setId(resultSet.getLong("id"));
                     filmeSalvo.setNome(resultSet.getString("nome"));
                     filmeSalvo.setDataHoraEstreia(resultSet.getTimestamp("estreia").toLocalDateTime());
-                    filmeSalvo.setDataHoraPreEstreia(resultSet.getTimestamp("preestreia").toLocalDateTime());
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return filmeSalvo;
     }
@@ -54,7 +53,6 @@ public class FilmeDao extends AbstractDao<Filme> {
                 filme.setId(resultSet.getLong("id"));
                 filme.setNome(resultSet.getString("nome"));
                 filme.setDataHoraEstreia(resultSet.getTimestamp("estreia").toLocalDateTime());
-                filme.setDataHoraPreEstreia(resultSet.getTimestamp("preestreia").toLocalDateTime());
                 filmes.add(filme);
             }
         }catch (SQLException e) {
@@ -87,7 +85,6 @@ public class FilmeDao extends AbstractDao<Filme> {
                 filme.setId(resultSet.getLong("id"));
                 filme.setNome(resultSet.getString("nome"));
                 filme.setDataHoraEstreia(resultSet.getTimestamp("estreia").toLocalDateTime());
-                filme.setDataHoraPreEstreia(resultSet.getTimestamp("preestreia").toLocalDateTime());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,11 +96,10 @@ public class FilmeDao extends AbstractDao<Filme> {
     public boolean update(Filme filme) {
         try {
             if (filme != null) {
-                preparedStatement = super.connection.prepareStatement("update filme set nome = ?, estreia = ?, preestreia = ? where id = ?;", Statement.RETURN_GENERATED_KEYS);
+                preparedStatement = super.connection.prepareStatement("update filme set nome = ?, estreia = ? where id = ?;", Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setString(1, filme.getNome());
                 preparedStatement.setTimestamp(2, Timestamp.valueOf(dateTimeFormatter.format(filme.getDataHoraEstreia())));
-                preparedStatement.setTimestamp(3, Timestamp.valueOf(dateTimeFormatter.format(filme.getDataHoraPreEstreia())));
-                preparedStatement.setLong(4, filme.getId());
+                preparedStatement.setLong(3, filme.getId());
                 preparedStatement.executeUpdate();
                 resultSet = preparedStatement.getGeneratedKeys();
                 return true;

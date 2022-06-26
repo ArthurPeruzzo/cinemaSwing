@@ -71,7 +71,7 @@ public class PoltronaDao extends AbstractDao<Poltrona>{
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir.");
+            JOptionPane.showMessageDialog(null, "Não é possível excluir a poltrona pois já existe um pedido vinculada a ela.");
             return false;
         }
     }
@@ -110,17 +110,18 @@ public class PoltronaDao extends AbstractDao<Poltrona>{
         return false;
     }
 
-    public List<Poltrona> buscaPoltronasIndisponiveis(){
+    public List<Poltrona> buscaPoltronasIndisponiveis(Long filmeId, Long salaId){
         List<Poltrona> poltronas = new ArrayList<>();
         try {
             preparedStatement = super.connection.prepareStatement("select distinct p2.* from pedido p \n" +
-                    "inner join horario_sessao hs on p.filmeid = hs.filmeid and hs.salaid = p.salaid \n" +
-                    "inner join sala s on s.id = p.salaid\n" +
+                    "inner join horario_sessao hs on p.filmeid = hs.filmeid and p.salaid = hs.salaid " +
                     "inner join pedido_poltrona pp on pp.pedidoid = p.id\n" +
                     "inner join poltrona p2 on p2.id = pp.poltronaid\n" +
-                    "where p.status = 'PAGO' and\n" +
-                    "p.filmeid = 5 and\n" +
-                    "hs.data = '2022-05-06'");
+                    "where p.filmeid = ? and\n" +
+                    "p.salaid = ? and\n" +
+                    "hs.\"data\" > CURRENT_DATE");
+            preparedStatement.setLong(1, filmeId);
+            preparedStatement.setLong(2, salaId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Poltrona poltrona = new Poltrona();

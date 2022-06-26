@@ -125,7 +125,7 @@ public class IfrSalas extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton5.setText("Atualizar");
+        jButton5.setText("Editar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);

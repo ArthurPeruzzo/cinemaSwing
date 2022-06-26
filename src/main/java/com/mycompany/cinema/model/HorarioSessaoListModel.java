@@ -11,7 +11,7 @@ public class HorarioSessaoListModel extends AbstractTableModel {
     private List<HorarioSessao> horariosSessao;
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    private final String[] colunas = new String[]{"SalaId", "FilmeId", "Data", "Hora"};
+    private final String[] colunas = new String[]{"Sala", "Filme", "Data", "Hora"};
 
     public HorarioSessaoListModel(List<HorarioSessao> horariosSessao) {
         this.horariosSessao = horariosSessao;
@@ -32,9 +32,9 @@ public class HorarioSessaoListModel extends AbstractTableModel {
         HorarioSessao horarioSessao = horariosSessao.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return horarioSessao.getSala().getId();
+                return horarioSessao.getSala().getCodigo();
             case 1:
-                return horarioSessao.getFilme().getId();
+                return horarioSessao.getFilme().getNome();
             case 2:
                 return dateFormatter.format(horarioSessao.getData());
             case 3:
@@ -48,6 +48,10 @@ public class HorarioSessaoListModel extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         return colunas[column];
+    }
+
+    public HorarioSessao getHorarioSessaoPorLinha(int linha){
+        return horariosSessao.get(linha);
     }
 
 }

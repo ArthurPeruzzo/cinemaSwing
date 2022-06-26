@@ -19,6 +19,17 @@ public class Sala {
     public Sala() {
     }
 
+    public Sala(Object sala) {
+        if(sala != null){
+            Sala salaObject = (Sala) sala;
+            this.id = salaObject.getId();
+            this.codigo = salaObject.getCodigo();
+        }
+    }
+
+
+
+
     public Sala(Long id) {
         this.id = id;
     }
@@ -44,4 +55,8 @@ public class Sala {
         this.codigo = codigo;
     }
 
+    @Override
+    public String toString() {
+        return id + " - " + codigo;
+    }
 }

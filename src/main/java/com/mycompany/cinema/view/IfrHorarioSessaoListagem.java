@@ -5,34 +5,50 @@
  */
 package com.mycompany.cinema.view;
 
+import com.mycompany.cinema.dao.FilmeDao;
+import com.mycompany.cinema.dao.HorarioDao;
 import com.mycompany.cinema.dao.PoltronaDao;
+import com.mycompany.cinema.entidade.Filme;
+import com.mycompany.cinema.entidade.HorarioSessao;
 import com.mycompany.cinema.entidade.Poltrona;
+import com.mycompany.cinema.model.HorarioSessaoListModel;
 import com.mycompany.cinema.model.PoltronaListModel;
+import com.mycompany.cinema.util.Util;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 import java.util.List;
 
-public class IfrPoltronas extends JInternalFrame {
-    private final PoltronaDao poltronaDao = new PoltronaDao();
+public class IfrHorarioSessaoListagem extends JInternalFrame {
+    private final HorarioDao horarioDao = new HorarioDao();
+    private final FilmeDao filmeDao = new FilmeDao();
+    private HorarioSessaoListModel horarioSessaoListModel = null;
 
-    public IfrPoltronas() {
+    public IfrHorarioSessaoListagem() {
         initComponents();
-        super.setTitle("Cadastro de Poltronas");
-        atualizaListaDePoltronas();
-
+        super.setTitle("Listagem de horários");
+        buscaFilmes();
     }
 
-    public void atualizaListaDePoltronas(){
-        List<Poltrona> salas = poltronaDao.findAll();
-        PoltronaListModel poltronaListModel = new PoltronaListModel(salas);
-        limpaForm();
-        jTable1.setModel(poltronaListModel);
+    private void buscaFilmes() {
+        List<Filme> filmes = filmeDao.findAll();
+        if(!Util.listNuloOuVazio(filmes)){
+            filmes.forEach(f -> jFilme.addItem(f));
+        }
+    }
+
+    public void atualizaListaDeHorarios() {
+        Filme filmeSelecionado = (Filme) jFilme.getSelectedItem();
+        if (filmeSelecionado != null) {
+            List<HorarioSessao> horarios = horarioDao.buscaHorariosPeloFilmeEDataMaiorQueAtual(filmeSelecionado);
+            horarioSessaoListModel = new HorarioSessaoListModel(horarios);
+            limpaForm();
+            jTable1.setModel(horarioSessaoListModel);
+        }
     }
 
     private void limpaForm() {
-        poltronaId.setText(null);
-        codigoPoltronaText.setText(null);
-        poltronaId.setEnabled(false);
+        jFilme.setSelectedItem(new Filme());
     }
 
     /**
@@ -45,62 +61,48 @@ public class IfrPoltronas extends JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        poltronaId = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        codigoPoltronaText = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jFilme = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        limparForm = new javax.swing.JButton();
+        buscarHorariosBt = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        fechar = new javax.swing.JButton();
+        jselecionar = new javax.swing.JButton();
+        jFechar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
 
-        jLabel1.setText("Código");
+        jLabel2.setText("Selecione o filme que deseja assistir");
 
-        codigoPoltronaText.addActionListener(new java.awt.event.ActionListener() {
+        jFilme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codigoPoltronaTextActionPerformed(evt);
+                jFilmeActionPerformed(evt);
             }
         });
-
-        jLabel8.setText("Código da poltrona");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(poltronaId, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(codigoPoltronaText, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(164, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jFilme, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(333, 333, 333))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(poltronaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(codigoPoltronaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jFilme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -116,26 +118,12 @@ public class IfrPoltronas extends JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel6.setText("Lista de poltronas");
+        jLabel6.setText("Lista de horários");
 
-        jButton4.setText("Remover");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        buscarHorariosBt.setText("Buscar");
+        buscarHorariosBt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Editar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        limparForm.setText("Limpar");
-        limparForm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limparFormActionPerformed(evt);
+                buscarHorariosBtActionPerformed(evt);
             }
         });
 
@@ -147,50 +135,41 @@ public class IfrPoltronas extends JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(limparForm)
-                        .addGap(8, 8, 8))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addGap(3, 3, 3))
+                        .addComponent(buscarHorariosBt)
+                        .addGap(40, 40, 40))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(limparForm))
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton4))
-                .addGap(61, 61, 61))
+                    .addComponent(jLabel6)
+                    .addComponent(buscarHorariosBt))
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jselecionar.setText("Selecionar");
+        jselecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jselecionarActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton1);
+        jPanel4.add(jselecionar);
 
-        fechar.setText("Fechar");
-        fechar.addActionListener(new java.awt.event.ActionListener() {
+        jFechar.setText("Fechar");
+        jFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fecharActionPerformed(evt);
+                jFecharActionPerformed(evt);
             }
         });
-        jPanel4.add(fechar);
+        jPanel4.add(jFechar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,20 +187,38 @@ public class IfrPoltronas extends JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 40, Short.MAX_VALUE))
+                .addGap(0, 28, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void jselecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jselecionarActionPerformed
+        int linhaSelecionada = jTable1.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            if (horarioSessaoListModel != null){
+                HorarioSessao horarioSessao = horarioSessaoListModel.getHorarioSessaoPorLinha(linhaSelecionada);
+               JFrame.horarioSessaoListagem(horarioSessao);
+            }
+        }
         save();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jselecionarActionPerformed
 
     private void codigoPoltronaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoPoltronaTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_codigoPoltronaTextActionPerformed
+
+    private void jFilmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFilmeActionPerformed
+    }//GEN-LAST:event_jFilmeActionPerformed
+
+    private void buscarHorariosBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarHorariosBtActionPerformed
+        atualizaListaDeHorarios();
+    }//GEN-LAST:event_buscarHorariosBtActionPerformed
+
+    private void jFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFecharActionPerformed
+        limpaForm();
+        this.dispose();
+    }//GEN-LAST:event_jFecharActionPerformed
 
     private void fecharActionPerformed(java.awt.event.ActionEvent evt) {                                       
         limpaForm();
@@ -235,12 +232,12 @@ public class IfrPoltronas extends JInternalFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         int linhaSelecionada = jTable1.getSelectedRow();
         if (linhaSelecionada >= 0) {
-            Long idPoltrona = (Long) jTable1.getValueAt(linhaSelecionada, 0);
-            Poltrona salaDoBanco = poltronaDao.findById(idPoltrona);
-            if(salaDoBanco != null){
-                poltronaId.setText(salaDoBanco.getId().toString());
-                codigoPoltronaText.setText(salaDoBanco.getCodigo());
-            }
+//            Long idPoltrona = (Long) jTable1.getValueAt(linhaSelecionada, 0);
+//            Poltrona salaDoBanco = horarioDao.findById(idPoltrona);
+//            if(salaDoBanco != null){
+//                poltronaId.setText(salaDoBanco.getId().toString());
+//                codigoPoltronaText.setText(salaDoBanco.getCodigo());
+//            }
         }
     }
 
@@ -252,11 +249,11 @@ public class IfrPoltronas extends JInternalFrame {
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (opcao == JOptionPane.YES_OPTION) {
                 Long idPoltrona = (Long) jTable1.getValueAt(linhaSelecionada, 0);
-                if(poltronaDao.delete(idPoltrona)){
+                if(horarioDao.delete(idPoltrona)){
                     JOptionPane.showMessageDialog(null, "Poltrona excluída com sucesso!");
                 }
 
-                atualizaListaDePoltronas();
+                atualizaListaDeHorarios();
                 }
             }
         else {
@@ -267,43 +264,41 @@ public class IfrPoltronas extends JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField codigoPoltronaText;
-    private javax.swing.JButton fechar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton buscarHorariosBt;
+    private javax.swing.JButton jFechar;
+    private javax.swing.JComboBox<Filme> jFilme;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton limparForm;
-    private javax.swing.JTextField poltronaId;
+    private javax.swing.JButton jselecionar;
     // End of variables declaration//GEN-END:variables
 
-    private Poltrona getPoltrona() {
-        Poltrona poltrona = null;
-        if(!codigoPoltronaText.getText().equals("")){
-            poltrona = new Poltrona();
-            if(!poltronaId.getText().equals("")){
-                poltrona.setId(Long.valueOf(poltronaId.getText()));
-            }
-            poltrona.setCodigo(codigoPoltronaText.getText());
-        }
-        return poltrona;
+    private HorarioSessao getPoltrona() {
+//        Poltrona poltrona = null;
+//        if(!codigoPoltronaText.getText().equals("")){
+//            poltrona = new Poltrona();
+//            if(!poltronaId.getText().equals("")){
+//                poltrona.setId(Long.valueOf(poltronaId.getText()));
+//            }
+//            poltrona.setCodigo(codigoPoltronaText.getText());
+//        }
+//        return poltrona;
+        return new HorarioSessao();
     }
 
     private void save() {
-        Poltrona sala = getPoltrona();
+        Poltrona sala = null;
         if (sala != null) {
             if(sala.getId() != null){
-                poltronaDao.update(sala);
-            } else
-                poltronaDao.insert(sala);
+//                horarioDao.update(sala);
+            } else{
+//                horarioDao.insert(sala);
+            }
         }
-            atualizaListaDePoltronas();
+            atualizaListaDeHorarios();
     }
 }

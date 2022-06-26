@@ -20,17 +20,24 @@ public class Pedido {
 
     private LocalDateTime dataHora;
 
-    private StatusPedido status;
-
     public Pedido() {
     }
 
-    public Pedido(Long id, Sala sala, Filme filme, LocalDateTime dataHora, StatusPedido status) {
+    public Pedido(Long id) {
+        this.id = id;
+    }
+
+    public Pedido(Long id, Sala sala, Filme filme, LocalDateTime dataHora) {
         this.id = id;
         this.sala = sala;
         this.filme = filme;
         this.dataHora = dataHora;
-        this.status = status;
+    }
+
+    public Pedido(Sala sala, Filme filme, LocalDateTime dataHora) {
+        this.sala = sala;
+        this.filme = filme;
+        this.dataHora = dataHora;
     }
 
     public Long getId() {
@@ -63,14 +70,6 @@ public class Pedido {
 
     public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
-    }
-
-    public StatusPedido getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusPedido status) {
-        this.status = status;
     }
     
 }

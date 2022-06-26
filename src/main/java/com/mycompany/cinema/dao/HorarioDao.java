@@ -6,6 +6,7 @@ import com.mycompany.cinema.entidade.Sala;
 
 import javax.swing.*;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,9 @@ public class HorarioDao extends AbstractDao<HorarioSessao> {
     public List<HorarioSessao> findAll() {
         List<HorarioSessao> horarioSessaos = new ArrayList<>();
         try {
-            preparedStatement = super.connection.prepareStatement("select * from horario_sessao f");
+            preparedStatement = super.connection.prepareStatement("select f.*, s.codigo, fi.nome from horario_sessao f " +
+                    "inner join sala s on s.id = f.salaid " +
+                    "inner join filme fi on fi.id = f.filmeid");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 HorarioSessao horarioSessao = new HorarioSessao();
@@ -58,6 +61,9 @@ public class HorarioDao extends AbstractDao<HorarioSessao> {
                 horarioSessao.setFilme(new Filme(resultSet.getLong("filmeid")));
                 horarioSessao.setData(resultSet.getDate("data").toLocalDate());
                 horarioSessao.setHora(resultSet.getTime("hora").toLocalTime());
+                horarioSessao.getSala().setCodigo(resultSet.getString("codigo"));
+                horarioSessao.getFilme().setNome(resultSet.getString("nome"));
+
                 horarioSessaos.add(horarioSessao);
             }
         }catch (SQLException e) {
@@ -103,8 +109,61 @@ public class HorarioDao extends AbstractDao<HorarioSessao> {
         return horarioSessao;
     }
 
+    public HorarioSessao findBySalaAndFilme(Long salaId, Long filmeId) {
+        HorarioSessao horarioSessao = new HorarioSessao();
+        try {
+            preparedStatement = super.connection.prepareStatement("select f.*, s.codigo, fi.nome from horario_sessao f " +
+                    "inner join sala s on s.id = f.salaid " +
+                    "inner join filme fi on fi.id = f.filmeid " +
+                    "where f.salaid = ? " +
+                    "and f.filmeid = ?;");
+            preparedStatement.setLong(1, salaId);
+            preparedStatement.setLong(2, filmeId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                horarioSessao.setSala(new Sala(resultSet.getLong("salaid")));
+                horarioSessao.setFilme(new Filme(resultSet.getLong("filmeid")));
+                horarioSessao.setData(resultSet.getDate("data").toLocalDate());
+                horarioSessao.setHora(resultSet.getTime("hora").toLocalTime());
+                horarioSessao.getSala().setCodigo(resultSet.getString("codigo"));
+                horarioSessao.getFilme().setNome(resultSet.getString("nome"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return horarioSessao;
+    }
+
     @Override
     public boolean update(HorarioSessao object) {
         return false;
     }
+
+    public List<HorarioSessao> buscaHorariosPeloFilmeEDataMaiorQueAtual(Filme filme){
+        List<HorarioSessao> horarioSessaos = new ArrayList<>();
+        try {
+            preparedStatement = super.connection.prepareStatement("select f.*, s.codigo, fi.nome from horario_sessao f " +
+                    "inner join sala s on s.id = f.salaid " +
+                    "inner join filme fi on fi.id = f.filmeid "+
+                    "where fi.id = ? " +
+                    "and f.\"data\" > CURRENT_DATE");
+            preparedStatement.setLong(1, filme.getId());
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                HorarioSessao horarioSessao = new HorarioSessao();
+                horarioSessao.setSala(new Sala(resultSet.getLong("salaid")));
+                horarioSessao.setFilme(new Filme(resultSet.getLong("filmeid")));
+                horarioSessao.setData(resultSet.getDate("data").toLocalDate());
+                horarioSessao.setHora(resultSet.getTime("hora").toLocalTime());
+                horarioSessao.getSala().setCodigo(resultSet.getString("codigo"));
+                horarioSessao.getFilme().setNome(resultSet.getString("nome"));
+
+                horarioSessaos.add(horarioSessao);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return horarioSessaos;
+    }
+
 }

@@ -103,16 +103,6 @@
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                           <Component id="dataEstreia" min="-2" pref="171" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="dataPreEstreia" min="-2" pref="179" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -121,15 +111,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="dataEstreia" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="dataPreEstreia" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="dataEstreia" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -148,19 +132,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Data da estr&#xe9;ia"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Data da pr&#xe9;-estreia"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JFormattedTextField" name="dataPreEstreia">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="dd/MM/yyyy HH:mm:ss" subtype="-1" type="1"/>
-                </Property>
+                <Property name="text" type="java.lang.String" value="Data e hora da estr&#xe9;ia"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -257,7 +229,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Atualizar"/>
+            <Property name="text" type="java.lang.String" value="Editar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
