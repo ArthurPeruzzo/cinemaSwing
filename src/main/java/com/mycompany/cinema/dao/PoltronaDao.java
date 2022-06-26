@@ -5,6 +5,7 @@
 package com.mycompany.cinema.dao;
 
 import com.mycompany.cinema.entidade.*;
+import com.mycompany.cinema.util.Util;
 
 import javax.swing.*;
 import java.sql.*;
@@ -40,7 +41,7 @@ public class PoltronaDao extends AbstractDao<Poltrona>{
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return poltronaSalva;
     }
@@ -58,7 +59,7 @@ public class PoltronaDao extends AbstractDao<Poltrona>{
                 poltronas.add(poltrona);
             }
         }catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return poltronas;
     }
@@ -71,6 +72,7 @@ public class PoltronaDao extends AbstractDao<Poltrona>{
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException ex) {
+            Util.gravarErro(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Não é possível excluir a poltrona pois já existe um pedido vinculada a ela.");
             return false;
         }
@@ -88,7 +90,7 @@ public class PoltronaDao extends AbstractDao<Poltrona>{
                 poltrona.setCodigo(resultSet.getString("codigo"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return poltrona;
     }
@@ -105,7 +107,7 @@ public class PoltronaDao extends AbstractDao<Poltrona>{
                 return true;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return false;
     }
@@ -130,7 +132,7 @@ public class PoltronaDao extends AbstractDao<Poltrona>{
                 poltronas.add(poltrona);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return poltronas;
     }

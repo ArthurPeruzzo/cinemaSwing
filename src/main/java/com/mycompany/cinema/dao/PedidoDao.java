@@ -5,6 +5,7 @@
 package com.mycompany.cinema.dao;
 
 import com.mycompany.cinema.entidade.*;
+import com.mycompany.cinema.util.Util;
 
 import javax.swing.*;
 import java.sql.*;
@@ -44,7 +45,7 @@ public class PedidoDao extends AbstractDao<Pedido>{
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return pedidoSalvo;
     }
@@ -62,6 +63,7 @@ public class PedidoDao extends AbstractDao<Pedido>{
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException ex) {
+            Util.gravarErro(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao excluir.");
             return false;
         }

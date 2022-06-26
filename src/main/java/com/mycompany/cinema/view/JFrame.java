@@ -49,8 +49,6 @@ public class JFrame extends javax.swing.JFrame {
         jMenuSala = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jHorariosMenu = new javax.swing.JMenuItem();
-        jSeparator4 = new javax.swing.JPopupMenu.Separator();
-        jPoltronaMenu = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -96,15 +94,6 @@ public class JFrame extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jHorariosMenu);
-        jMenu1.add(jSeparator4);
-
-        jPoltronaMenu.setText("Poltronas");
-        jPoltronaMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPoltronaMenuActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jPoltronaMenu);
         jMenu1.add(jSeparator2);
 
         jMenuItem2.setText("Sair");
@@ -161,13 +150,6 @@ public class JFrame extends javax.swing.JFrame {
         Util.centralizarFrame(irfHorarioSessao);
         irfHorarioSessao.setVisible(true);
     }//GEN-LAST:event_jHorariosMenuActionPerformed
-
-    private void jPoltronaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPoltronaMenuActionPerformed
-        IfrPoltronas ifrPoltronas = new IfrPoltronas();
-        jDesktopPane1.add(ifrPoltronas);
-        Util.centralizarFrame(ifrPoltronas);
-        ifrPoltronas.setVisible(true);
-    }//GEN-LAST:event_jPoltronaMenuActionPerformed
 
     private void jHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHorarioActionPerformed
         IfrHorarioSessaoListagem irfHorarioSessaoListagem = new IfrHorarioSessaoListagem();
@@ -261,11 +243,8 @@ public class JFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuFilme;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuSala;
-    private javax.swing.JMenuItem jPoltronaMenu;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
-    private javax.swing.JPopupMenu.Separator jSeparator4;
-
     // End of variables declaration//GEN-END:variables
 }

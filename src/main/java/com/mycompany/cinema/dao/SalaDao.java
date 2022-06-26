@@ -1,6 +1,7 @@
 package com.mycompany.cinema.dao;
 
 import com.mycompany.cinema.entidade.Sala;
+import com.mycompany.cinema.util.Util;
 
 import javax.swing.*;
 import java.sql.*;
@@ -31,7 +32,7 @@ public class SalaDao extends AbstractDao<Sala> {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return salaSalva;
     }
@@ -49,7 +50,7 @@ public class SalaDao extends AbstractDao<Sala> {
                 salas.add(sala);
             }
         }catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return salas;
     }
@@ -62,6 +63,7 @@ public class SalaDao extends AbstractDao<Sala> {
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException ex) {
+            Util.gravarErro(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao excluir. A sala possui vínculos com horários ou pedidos.");
             return false;
         }
@@ -79,7 +81,7 @@ public class SalaDao extends AbstractDao<Sala> {
                 sala.setCodigo(resultSet.getString("codigo"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return sala;
     }
@@ -96,7 +98,7 @@ public class SalaDao extends AbstractDao<Sala> {
                 return true;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return false;
     }

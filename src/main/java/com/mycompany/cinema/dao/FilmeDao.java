@@ -56,7 +56,7 @@ public class FilmeDao extends AbstractDao<Filme> {
                 filmes.add(filme);
             }
         }catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return filmes;
     }
@@ -69,6 +69,7 @@ public class FilmeDao extends AbstractDao<Filme> {
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException ex) {
+            Util.gravarErro(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao excluir. O filme possui vínculos com horários ou pedidos.");
             return false;
         }
@@ -87,7 +88,7 @@ public class FilmeDao extends AbstractDao<Filme> {
                 filme.setDataHoraEstreia(resultSet.getTimestamp("estreia").toLocalDateTime());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return filme;
     }
@@ -105,7 +106,7 @@ public class FilmeDao extends AbstractDao<Filme> {
                 return true;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return false;
     }

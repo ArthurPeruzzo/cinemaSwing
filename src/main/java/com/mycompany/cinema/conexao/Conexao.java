@@ -4,6 +4,8 @@
  */
 package com.mycompany.cinema.conexao;
 
+import com.mycompany.cinema.util.Util;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -27,8 +29,10 @@ public class Conexao {
             connection = DriverManager.getConnection(URL, USUARIO, SENHA);
             System.out.println("conectou");
         } catch (SQLException ex) {
+            Util.gravarErro(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao conectar... " + ex.getMessage());
         } catch (ClassNotFoundException ex) {
+            Util.gravarErro(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Problemas com driver... " + ex.getMessage());
         }
     }

@@ -80,7 +80,6 @@ public class IfrHorarioSessao extends JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         limparForm = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -172,13 +171,6 @@ public class IfrHorarioSessao extends JInternalFrame {
             }
         });
 
-        jButton5.setText("Editar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
         limparForm.setText("Limpar");
         limparForm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,14 +190,12 @@ public class IfrHorarioSessao extends JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(limparForm)
                         .addGap(8, 8, 8))
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addGap(3, 3, 3))
+                .addGap(18, 18, 18))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,9 +207,7 @@ public class IfrHorarioSessao extends JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton4))
+                .addComponent(jButton4)
                 .addGap(61, 61, 61))
         );
 
@@ -318,9 +306,8 @@ public class IfrHorarioSessao extends JInternalFrame {
                     "Exclusão",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (opcao == JOptionPane.YES_OPTION) {
-                Long idSala = (Long) jTable1.getValueAt(linhaSelecionada, 0);
-                Long idFilme = (Long) jTable1.getValueAt(linhaSelecionada, 1);
-                if(horarioDao.deleteHorarioSessao(idSala, idFilme)){
+                HorarioSessao horarioSessao = horarioSessaoListModel.getHorarioSessaoPorLinha(linhaSelecionada);
+                if(horarioDao.deleteHorarioSessao(horarioSessao)){
                     JOptionPane.showMessageDialog(null, "HorarioSessao excluída com sucesso!");
                 }
 
@@ -341,7 +328,6 @@ public class IfrHorarioSessao extends JInternalFrame {
     private javax.swing.JFormattedTextField hora;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

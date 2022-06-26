@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
-public  class Util {
+public class Util {
 
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     
@@ -17,7 +17,7 @@ public  class Util {
     }
 
     public static boolean listNuloOuVazio(Collection<?> collection){
-           return collection == null || collection.isEmpty();
+        return collection == null || collection.isEmpty();
     }
 
     public static void gravarErro( String erro) {

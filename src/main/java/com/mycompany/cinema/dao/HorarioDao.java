@@ -3,6 +3,7 @@ package com.mycompany.cinema.dao;
 import com.mycompany.cinema.entidade.Filme;
 import com.mycompany.cinema.entidade.HorarioSessao;
 import com.mycompany.cinema.entidade.Sala;
+import com.mycompany.cinema.util.Util;
 
 import javax.swing.*;
 import java.sql.*;
@@ -42,7 +43,7 @@ public class HorarioDao extends AbstractDao<HorarioSessao> {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return horarioSessaoSalvo;
     }
@@ -67,7 +68,7 @@ public class HorarioDao extends AbstractDao<HorarioSessao> {
                 horarioSessaos.add(horarioSessao);
             }
         }catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return horarioSessaos;
     }
@@ -77,14 +78,17 @@ public class HorarioDao extends AbstractDao<HorarioSessao> {
        return false;
     }
 
-    public boolean deleteHorarioSessao(Long salaId, Long filmeId){
+    public boolean deleteHorarioSessao(HorarioSessao horarioSessao){
         try {
-            preparedStatement = connection.prepareStatement("DELETE FROM horario_sessao WHERE salaid = ? and filmeid = ?");
-            preparedStatement.setLong(1, salaId);
-            preparedStatement.setLong(2, filmeId);
+            preparedStatement = connection.prepareStatement("DELETE FROM horario_sessao WHERE salaid = ? and filmeid = ? and data = ? and hora = ?");
+            preparedStatement.setLong(1, horarioSessao.getSala().getId());
+            preparedStatement.setLong(2, horarioSessao.getFilme().getId());
+            preparedStatement.setDate(3, Date.valueOf(horarioSessao.getData()));
+            preparedStatement.setTime(4, Time.valueOf(timeFormatter.format(horarioSessao.getHora())));
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException ex) {
+            Util.gravarErro(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao excluir.");
             return false;
         }
@@ -104,7 +108,7 @@ public class HorarioDao extends AbstractDao<HorarioSessao> {
                 horarioSessao.setHora(resultSet.getTime("hora").toLocalTime());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return horarioSessao;
     }
@@ -129,7 +133,7 @@ public class HorarioDao extends AbstractDao<HorarioSessao> {
                 horarioSessao.getFilme().setNome(resultSet.getString("nome"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return horarioSessao;
     }
@@ -161,7 +165,7 @@ public class HorarioDao extends AbstractDao<HorarioSessao> {
                 horarioSessaos.add(horarioSessao);
             }
         }catch (SQLException e) {
-            e.printStackTrace();
+            Util.gravarErro(e.getMessage());
         }
         return horarioSessaos;
     }
