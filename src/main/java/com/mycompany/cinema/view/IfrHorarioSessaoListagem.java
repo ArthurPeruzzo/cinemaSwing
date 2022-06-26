@@ -229,16 +229,7 @@ public class IfrHorarioSessaoListagem extends JInternalFrame {
         limpaForm();
     }
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        int linhaSelecionada = jTable1.getSelectedRow();
-        if (linhaSelecionada >= 0) {
-//            Long idPoltrona = (Long) jTable1.getValueAt(linhaSelecionada, 0);
-//            Poltrona salaDoBanco = horarioDao.findById(idPoltrona);
-//            if(salaDoBanco != null){
-//                poltronaId.setText(salaDoBanco.getId().toString());
-//                codigoPoltronaText.setText(salaDoBanco.getCodigo());
-//            }
-        }
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -277,28 +268,7 @@ public class IfrHorarioSessaoListagem extends JInternalFrame {
     private javax.swing.JButton jselecionar;
     // End of variables declaration//GEN-END:variables
 
-    private HorarioSessao getPoltrona() {
-//        Poltrona poltrona = null;
-//        if(!codigoPoltronaText.getText().equals("")){
-//            poltrona = new Poltrona();
-//            if(!poltronaId.getText().equals("")){
-//                poltrona.setId(Long.valueOf(poltronaId.getText()));
-//            }
-//            poltrona.setCodigo(codigoPoltronaText.getText());
-//        }
-//        return poltrona;
-        return new HorarioSessao();
-    }
-
     private void save() {
-        Poltrona sala = null;
-        if (sala != null) {
-            if(sala.getId() != null){
-//                horarioDao.update(sala);
-            } else{
-//                horarioDao.insert(sala);
-            }
-        }
-            atualizaListaDeHorarios();
+        atualizaListaDeHorarios();
     }
 }

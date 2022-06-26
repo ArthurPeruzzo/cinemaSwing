@@ -27,9 +27,6 @@ public class Sala {
         }
     }
 
-
-
-
     public Sala(Long id) {
         this.id = id;
     }

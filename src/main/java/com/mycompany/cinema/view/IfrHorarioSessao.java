@@ -14,7 +14,6 @@ import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -286,17 +285,7 @@ public class IfrHorarioSessao extends JInternalFrame {
         limpaForm();
     }
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        int linhaSelecionada = jTable1.getSelectedRow();
-        if (linhaSelecionada >= 0) {
-            HorarioSessao horarioSessaoPorLinha = horarioSessaoListModel.getHorarioSessaoPorLinha(linhaSelecionada);
-//            filme.setSelectedIndex(-1);
-//            filme.setSelectedItem(horarioSessaoPorLinha.getFilme());
-//            sala.setSelectedIndex(-1);
-//            sala.setSelectedItem(horarioSessaoPorLinha.getSala());
-//            data.setText(dateTimeFormatterData.format(horarioSessaoPorLinha.getData()));
-//            hora.setText(dateTimeFormatterHora.format(horarioSessaoPorLinha.getHora()));
-        }
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         

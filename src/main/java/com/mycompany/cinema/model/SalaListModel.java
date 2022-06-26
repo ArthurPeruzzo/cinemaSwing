@@ -3,7 +3,6 @@ package com.mycompany.cinema.model;
 import com.mycompany.cinema.entidade.Sala;
 
 import javax.swing.table.AbstractTableModel;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class SalaListModel extends AbstractTableModel {
